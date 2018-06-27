@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minidatabase.FXMLDocumentController">
+   <children>
+      <TreeView fx:id="treeView" layoutX="5.0" layoutY="40.0" prefHeight="355.0" prefWidth="128.0" />
+      <ListView fx:id="listView" layoutX="145.0" layoutY="47.0" prefHeight="348.0" prefWidth="448.0" />
+      <TextField fx:id="entryName" layoutX="145.0" layoutY="14.0" promptText="Search for name" />
+      <ComboBox fx:id="cboxSex" layoutX="387.0" layoutY="14.0" prefHeight="25.0" prefWidth="109.0" promptText="Sex" />
+      <ComboBox fx:id="cboxAge" layoutX="508.0" layoutY="14.0" prefHeight="25.0" prefWidth="75.0" promptText="Age" />
+      <Label fx:id="lblFiltres" layoutX="345.0" layoutY="18.0" text="Filtres" />
+      <MenuBar fx:id="menuMain" layoutY="2.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</Pane>
+
+
