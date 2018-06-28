@@ -37,7 +37,7 @@ import org.json.JSONObject;
  * @author dgarcia
  */
 public class FXMLDocumentController implements Initializable {
-    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\PersonData\\root\\";
+    private final String root = "C:\\Users\\Usuario\\Desktop\\Daniel programacion\\mBaseData\\miniDataBase\\root\\";
     
     //Manager
     private Manager manager;
@@ -56,6 +56,7 @@ public class FXMLDocumentController implements Initializable {
     //Lista enlazada de Folders
     private LinkedList<LinkedList> folderList;
     
+    
     //ComboBox Objects (Filres)
     
     @FXML
@@ -70,7 +71,9 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        
+        //Iniciando lista
+        this.folderList = new LinkedList<>();
+        this.folderList.setId("root");
         // Creando Manager para manejo de ventanas
         this.manager = new Manager();
 
@@ -101,20 +104,17 @@ public class FXMLDocumentController implements Initializable {
         
         });
         
-         treeView.setCellFactory(new CallbackImpl(this,this.folderList)); // Set Right Click options
+         
          
         try {
             this.init();
         } catch (IOException | JSONException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        treeView.setCellFactory(new CallbackImpl(this,this.folderList)); // Set Right Click options
          
 
     }
-
-
-        
-    
 
         //Functions 
 
@@ -131,14 +131,15 @@ public class FXMLDocumentController implements Initializable {
              
              String ussers = r.readLine();
              
-             if(!ussers.isEmpty()){
+             if(ussers != null){
                     String b []= ussers.split("@");       
                     for (String b1 : b) {
                         BufferedReader reader = new BufferedReader(new FileReader(root + b1 + "/personList.txt"));
                         JSONObject json = new JSONObject(reader.readLine());
                         int cont = json.getInt("CONT");
-                        JSONObject listPerson = new JSONObject("LIST");
+                        JSONObject listPerson = new JSONObject(json.getString("LIST"));
                         LinkedList<Person> listI = new LinkedList();
+                        listI.setId(b1);
                         for(int i = 0; i<cont ; i++){
                             JSONObject jpersonI = new JSONObject(listPerson.getString("Person"+i));
                             Person personI = new Person(jpersonI.getString("NAME"),
@@ -155,6 +156,7 @@ public class FXMLDocumentController implements Initializable {
                         
                         this.folderList.add(listI);
                         TreeItem<String> t = new TreeItem(b1);
+                       
                         this.troot.getChildren().add(t);
                         Node_T<Person> temp= listI.getHead();
                         if(temp!=null){
@@ -164,26 +166,29 @@ public class FXMLDocumentController implements Initializable {
                                 temp = temp.getNext();
                             }
                         }
+                        this.treeView.setCellFactory(new CallbackImpl(this,this.folderList));
                     }
                     
 
 }}
-    private void saveOnDisc() throws IOException, JSONException{
+    public void saveOnDisc() throws IOException, JSONException{
         Object[] result;
         result = this.troot.getChildren().toArray();
+        
+        
+        
         String r = "";
-        for (Object result1 : result) {
-            r += result1.toString() + "@";
+        for(int i =0 ; i<result.length;i++){
+            r += this.troot.getChildren().get(i).getValue()+"@";
         }
         
            
-        PrintWriter print = new PrintWriter(
-                            new BufferedWriter(
-                            new FileWriter(
-                            new File(root+"folderList.txt"))));        
-        
-        print.write(r);
-        print.close();
+        try (PrintWriter print = new PrintWriter(
+                new BufferedWriter(
+                        new FileWriter(
+                                new File(root+"folderList.txt"))))) {
+            print.write(r);
+        }
         
         
         
@@ -191,14 +196,14 @@ public class FXMLDocumentController implements Initializable {
         for(int i =0;i<b.length;i++){
             
                 JSONObject finalJson = new JSONObject();
-                File userFile = new File(root+b[i]);
-                userFile.mkdir();
+                File folder = new File(root+b[i]);
+                folder.mkdir();
                         
                 try (BufferedWriter bw = new BufferedWriter(
                                          new FileWriter(
                                          new File(root+b[i]+"/personList.txt")))){
                             
-                    LinkedList<LinkedList> uu = (LinkedList)this.folderList.findI(i);
+                    LinkedList<Person> uu = (LinkedList)this.folderList.findI(i);
                     
                     JSONObject jPersonList = new JSONObject();
                     int cont =0;
@@ -213,13 +218,13 @@ public class FXMLDocumentController implements Initializable {
                         jPerson.put("MM",temp.getValue().getMm());
                         jPerson.put("AA",temp.getValue().getAa());                        
                         jPerson.put("GEN",temp.getValue().getSex());     
-                        jPersonList.put("Person"+i,jPerson.toString());
+                        jPersonList.put("Person"+cont,jPerson.toString());
                         cont++;
                         temp = temp.getNext();
                         
                     }
-                    jPersonList.put("CONT",cont);
-                    jPersonList.put("LIST",jPersonList.toString());
+                    finalJson.put("CONT",cont);
+                    finalJson.put("LIST",jPersonList.toString());
                     
                     bw.write(finalJson.toString());
                     bw.close();

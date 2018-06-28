@@ -128,6 +128,7 @@ public class LinkedList <T> {
         Node_T r = this.findNode(value);
         return r;
     }
+
     /**
      * Llama al método privado para obtener la referencia a un Node particular
      * @param index - Posición de la cual sacar la referencia
@@ -341,5 +342,6 @@ public class LinkedList <T> {
              size--;
         }
     }
+ 
    
 }

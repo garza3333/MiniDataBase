@@ -5,10 +5,16 @@
  */
 package minidatabase;
 
+import Logic.LinkedList;
+import Logic.Node_T;
 import Objects.Person;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -19,15 +25,17 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
+import org.json.JSONException;
 
 /**
  *
  * @author dgarcia
  */
 public class FXMLFramePersonController implements Initializable {
-    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\PersonData\\root\\";
+    private final String root = "C:\\Users\\Usuario\\Desktop\\Daniel programacion\\mBaseData\\miniDataBase\\root\\";
     
-    
+    private LinkedList<LinkedList> mainList;
+    private FXMLDocumentController fxmlDoc;
     @FXML
     private TreeItem top;
     @FXML
@@ -61,6 +69,13 @@ public class FXMLFramePersonController implements Initializable {
     public String getEntryName(){
         return this.entryName.getText();
     }
+        public void setMainList(LinkedList<LinkedList> l){
+        this.mainList = l;
+    }
+        public void setDocController(FXMLDocumentController fdc){
+            this.fxmlDoc = fdc;
+        }
+       
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -71,52 +86,56 @@ public class FXMLFramePersonController implements Initializable {
         });
         //Funcion para añadir a una nueva persona
         
-        btnAddPerson.setOnAction((ActionEvent)->{
-            
+        btnAddPerson.setOnAction((ActionEvent ActionEvent) -> {
             //Validacion de espacios vacios
-            if(entryName.getText().isEmpty() || entrySecond.getText().isEmpty()
+            if (entryName.getText().isEmpty() || entrySecond.getText().isEmpty()
                     || entryLast.getText().isEmpty() || entryAge.getText().isEmpty()
-                    || entryBirthday.getValue() == null){
-                this.infoBox("Si te faltan datos porfavor rellenalos con 'NONE'", "Error de entrada", "Error al ingresar valores");}
-            // Validacion de int en vez de String
-//            }else if(!entryName.getText().toLowerCase().matches("[a-z]")||!entrySecond.getText().toLowerCase().matches("[a-z]")
-//                    || !entryLast.getText().toLowerCase().matches("[a-z]")){
-//                this.infoBox("Ingresaste un valor númerico donde no debe ir", "Error de entrada", "Error al ingresar valores");
-//                
-//            // Validacion de String en vez de int
-//            }else if(entryAge.getText().toLowerCase().matches("[a-z]")){
-//                this.infoBox("Ingresaste una palabra donde deberia ir un valor númerico", "Error de entrada", "Error al ingresar valores");
-//            }
-            //Creacion de nuevo objeto persona
-            else{
-            String[] array = this.entryBirthday.getValue().toString().split("-");
-            for(String s : array){
-                System.out.println(s);
+                    || entryBirthday.getValue() == null) {
+                FXMLFramePersonController.infoBox("Si te faltan datos porfavor rellenalos con 'NONE'", "Error de entrada", "Error al ingresar valores");
+            } else {
+                String[] array = FXMLFramePersonController.this.entryBirthday.getValue().toString().split("-");
+                for(String s : array){
+                    System.out.println(s);
+                }       String result;
+                if (FXMLFramePersonController.this.radiobtnMale.isSelected()) {
+                    result = "Male";
+                } else if (FXMLFramePersonController.this.radiobtnFemale.isSelected()) {
+                    result = "Female";
+                } else {
+                    result = "None";
+                }
+                Person p = new Person(entryName.getText(),
+                        entrySecond.getText(),
+                        entryLast.getText(),
+                        Integer.valueOf(entryAge.getText()),
+                        Integer.valueOf(array[2]),
+                        Integer.valueOf(array[1]),
+                        Integer.valueOf(array[0]),
+                        result);
+                Node_T<LinkedList> lTemp = FXMLFramePersonController.this.mainList.getHead();
+                while(lTemp!=null){
+                    if(lTemp.getValue().getId().equals(top.getValue().toString())){
+                        lTemp.getValue().add(p);
+                    }
+                    lTemp = lTemp.getNext();
+                }       p.showInfo();
+                top.getChildren().add(new TreeItem(entryName.getText()));
+                System.out.println(top.getValue().toString());
+                Node_T<LinkedList> lTempp = FXMLFramePersonController.this.mainList.getHead();
+                while(lTempp!=null){
+                    if(lTempp.getValue().getId().equals(top.getValue().toString())){
+                        lTempp.getValue().see();
+                        System.out.println(lTempp.getValue().getId());
+                    }
+                    lTempp = lTempp.getNext();
+                }
+                try {
+                    FXMLFramePersonController.this.fxmlDoc.saveOnDisc();
+                }catch (IOException | JSONException ex) {
+                    Logger.getLogger(FXMLFramePersonController.class.getName()).log(Level.SEVERE, null, ex);
+                }   mainStage.close();
             }
-            String result;
-            if(this.radiobtnMale.isSelected()){
-                result = "Male";
-            }else if(this.radiobtnFemale.isSelected()){
-                result = "Female";
-            }else{
-                result = "None";
-            }
-            Person p = new Person(entryName.getText(),
-                                  entrySecond.getText(),
-                                  entryLast.getText(),
-                                  Integer.valueOf(entryAge.getText()),
-                                  Integer.valueOf(array[2]),
-                                  Integer.valueOf(array[1]),
-                                  Integer.valueOf(array[0]),
-                                  result);
-            
-            p.showInfo();
-            top.getChildren().add(new TreeItem(entryName.getText()));
-            System.out.println(top.getValue().toString());
-            mainStage.close();
-
-            
-            }});
+        });
         
     }   
     
