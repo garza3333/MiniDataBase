@@ -10,11 +10,11 @@ import Logic.Node_T;
 import Objects.Person;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -44,6 +44,8 @@ public class FXMLFramePersonController implements Initializable {
     private Button btnAddPerson;
     @FXML
     private Button btnCancel;
+    @FXML
+    private Button btnDefault;
     @FXML
     private TextField entryName;
     @FXML
@@ -91,7 +93,7 @@ public class FXMLFramePersonController implements Initializable {
             if (entryName.getText().isEmpty() || entrySecond.getText().isEmpty()
                     || entryLast.getText().isEmpty() || entryAge.getText().isEmpty()
                     || entryBirthday.getValue() == null) {
-                FXMLFramePersonController.infoBox("Si te faltan datos porfavor rellenalos con 'NONE'", "Error de entrada", "Error al ingresar valores");
+                FXMLFramePersonController.infoBox("Si te faltan datos porfavor rellenalos con 'None'", "Error de entrada", "Error al ingresar valores");
             } else {
                 String[] array = FXMLFramePersonController.this.entryBirthday.getValue().toString().split("-");
                 for(String s : array){
@@ -135,6 +137,14 @@ public class FXMLFramePersonController implements Initializable {
                     Logger.getLogger(FXMLFramePersonController.class.getName()).log(Level.SEVERE, null, ex);
                 }   mainStage.close();
             }
+        });
+        
+        this.btnDefault.setOnAction((ActionEvent EventHandler) -> {
+            
+            FXMLFramePersonController.this.entrySecond.setText("None");
+            FXMLFramePersonController.this.entryLast.setText("None");
+            FXMLFramePersonController.this.entryAge.setText("0");
+            FXMLFramePersonController.this.entryBirthday.setValue(LocalDate.now());
         });
         
     }   

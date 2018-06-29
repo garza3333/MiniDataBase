@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -8,25 +10,66 @@
 
 <AnchorPane id="AnchorPane" prefHeight="276.0" prefWidth="316.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minidatabase.FXMLFramePersonController">
    <children>
-      <Label layoutX="39.0" layoutY="14.0" text="Name" />
-      <Label layoutX="18.0" layoutY="43.0" text="Second Name" />
-      <Label layoutX="28.0" layoutY="74.0" text="Last Name" />
-      <Label layoutX="44.0" layoutY="103.0" text="Age" />
+      <Label layoutX="20.0" layoutY="14.0" text="Name" />
+      <Label layoutX="19.0" layoutY="43.0" text="Second Name" />
+      <Label layoutX="24.0" layoutY="74.0" text="Last Name" />
+      <Label layoutX="23.0" layoutY="103.0" text="Age" />
       <Label layoutX="41.0" layoutY="179.0" />
-      <TextField fx:id="entryName" layoutX="102.0" layoutY="10.0" promptText="Name" />
-      <TextField fx:id="entrySecond" layoutX="102.0" layoutY="39.0" promptText="Second Name" />
-      <TextField fx:id="entryLast" layoutX="102.0" layoutY="70.0" promptText="Last Name" />
-      <TextField fx:id="entryAge" layoutX="102.0" layoutY="99.0" promptText="Age" />
-      <Button fx:id="btnAddPerson" layoutX="29.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Add  Person" />
-      <Button fx:id="btnCancel" layoutX="177.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Cancel" />
-      <Label layoutX="34.0" layoutY="130.0" text="Birthday" />
-      <DatePicker fx:id="entryBirthday" layoutX="102.0" layoutY="126.0" prefHeight="25.0" prefWidth="149.0" promptText="Birthday" />
+      <TextField fx:id="entryName" layoutX="102.0" layoutY="10.0" promptText="Name">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+      <TextField fx:id="entrySecond" layoutX="102.0" layoutY="39.0" promptText="Second Name">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+      <TextField fx:id="entryLast" layoutX="102.0" layoutY="70.0" promptText="Last Name">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+      <TextField fx:id="entryAge" layoutX="102.0" layoutY="99.0" promptText="Age">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+      <Button fx:id="btnAddPerson" layoutX="29.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Add  Person">
+         <effect>
+            <InnerShadow color="#00b0f5" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="btnCancel" layoutX="177.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Cancel">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <effect>
+            <InnerShadow color="RED" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label layoutX="23.0" layoutY="130.0" text="Birthday" />
+      <DatePicker fx:id="entryBirthday" layoutX="102.0" layoutY="126.0" prefHeight="25.0" prefWidth="149.0" promptText="Birthday">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></DatePicker>
       <RadioButton fx:id="radiobtnMale" layoutX="102.0" layoutY="162.0" mnemonicParsing="false" selected="true" text="Male">
          <toggleGroup>
             <ToggleGroup fx:id="genere" />
          </toggleGroup>
+         <effect>
+            <Glow />
+         </effect>
       </RadioButton>
-      <RadioButton fx:id="radiobtnFemale" layoutX="102.0" layoutY="188.0" mnemonicParsing="false" text="Female" toggleGroup="$genere" />
+      <RadioButton fx:id="radiobtnFemale" layoutX="102.0" layoutY="188.0" mnemonicParsing="false" text="Female" toggleGroup="$genere">
+         <effect>
+            <Glow />
+         </effect></RadioButton>
       <Label layoutX="36.0" layoutY="167.0" prefHeight="25.0" prefWidth="39.0" text="Genere" />
+      <Button fx:id="btnDefault" layoutX="177.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="SetDefault">
+         <effect>
+            <InnerShadow color="#56fffc" />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

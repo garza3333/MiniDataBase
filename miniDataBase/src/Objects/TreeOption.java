@@ -14,10 +14,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.TextFieldTreeCell;
 //import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCombination;
 import minidatabase.FXMLDocumentController;
 import minidatabase.Manager;
 
@@ -30,18 +28,19 @@ public class TreeOption extends TextFieldTreeCell<String> {
     private TextField textField;
     
     // Controlador y lista 
-    private static  FXMLDocumentController fxmlDoc;
-    private static  LinkedList<LinkedList> listMAIN;
+    private   FXMLDocumentController fxmlDoc;
+    private   LinkedList<LinkedList> listMAIN;
     
     public TreeOption(FXMLDocumentController ffPC , LinkedList<LinkedList> li) {
-        TreeOption.fxmlDoc = ffPC;
-        TreeOption.listMAIN = li;
+        fxmlDoc = ffPC;
+        listMAIN = li;
         MenuItem makeNewFolder = new MenuItem("Make New Folder");
         MenuItem delFolder = new MenuItem("Delete Folder");
         MenuItem addNewPerson = new MenuItem("Add New Person");
         MenuItem editPerson = new MenuItem("Edit");
-        makeNewFolder.setAccelerator(KeyCombination.keyCombination("Ctrl+F"));
-        addNewPerson.setAccelerator(KeyCombination.keyCombination("Ctrl+P"));
+        MenuItem delPerson = new MenuItem("Delete");
+//        makeNewFolder.setAccelerator(KeyCombination.keyCombination("Ctrl+F"));
+//        addNewPerson.setAccelerator(KeyCombination.keyCombination("Ctrl+P"));
         /**MenuItem MenuOption2 = new MenuItem("Update");
         MenuOption2.setAccelerator(KeyCombination.keyCombination("Ctrl+U"));
 
@@ -61,9 +60,10 @@ public class TreeOption extends TextFieldTreeCell<String> {
         childEliminarTodos.setAccelerator(KeyCombination.keyCombination("Shift+Delete"));
         MenuEliminar.getItems().addAll(childEliminarUno, childEliminarTodos);
 */
-        makeNewFolder.setOnAction(new newFolder(TreeOption.listMAIN));
+        makeNewFolder.setOnAction(new newFolder(listMAIN));
         delFolder.setOnAction(new deleteFolder());
-        addNewPerson.setOnAction(new newPerson(TreeOption.listMAIN,this.fxmlDoc));
+        addNewPerson.setOnAction(new newPerson(listMAIN,fxmlDoc));
+        editPerson.setOnAction(new editExistPerson(listMAIN, fxmlDoc));
         
         
         
@@ -73,7 +73,7 @@ public class TreeOption extends TextFieldTreeCell<String> {
                 */
         contextMenuF.getItems().addAll(makeNewFolder);
         contextMenuP.getItems().addAll(addNewPerson,delFolder);
-        contextMenuE.getItems().add(editPerson);
+        contextMenuE.getItems().addAll(editPerson,delPerson);
     } 
 
     @Override
@@ -107,7 +107,7 @@ public class TreeOption extends TextFieldTreeCell<String> {
         }
     }
     private boolean verify(String s){
-        Node_T<LinkedList> temp = TreeOption.listMAIN.getHead();
+        Node_T<LinkedList> temp = listMAIN.getHead();
         while(temp!=null){
             if(temp.getValue().getId().equals(s)){
                 return true;
@@ -124,7 +124,7 @@ public class TreeOption extends TextFieldTreeCell<String> {
     
     
     class newPerson implements EventHandler{
-        private LinkedList<LinkedList> mainL;
+        private final LinkedList<LinkedList> mainL;
         FXMLDocumentController fxmlDoc;
         public newPerson(LinkedList<LinkedList> l,FXMLDocumentController fxmlDo){
             this.mainL = l;
@@ -137,8 +137,22 @@ public class TreeOption extends TextFieldTreeCell<String> {
         }
         
     }
+    class editExistPerson implements EventHandler{
+        private final  LinkedList<LinkedList> lmain;
+        private final FXMLDocumentController fxmlDo;
+        public editExistPerson(LinkedList<LinkedList> l,FXMLDocumentController fxmlDo){
+            this.lmain = l;
+            this.fxmlDo =fxmlDo;
+        }
+        @Override
+        public void handle(Event event) {
+            Manager m = new Manager();
+            m.showPersonEdit(this.fxmlDo,getTreeItem(),this.lmain);
+        }
+        
+    }
     class newFolder implements EventHandler{
-        private LinkedList<LinkedList> mainL;
+        private final LinkedList<LinkedList> mainL;
         public newFolder(LinkedList<LinkedList> l){
             this.mainL = l;
         }

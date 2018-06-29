@@ -23,18 +23,25 @@ public class Manager {
     private final Stage stage;
     private final Stage second;
     private final Stage terc;
+    private final Stage cuar;
+    
     private FXMLFramePersonController cp;
     private FXMLnewFolderWindowController nfC;
+    private FXMLEditPersonController fxmlEditPC;
+    
    
     
         public Manager() {
         this.stage = new Stage();
         this.second = new Stage();
         this.terc = new Stage();
+        this.cuar = new Stage();
+        
     }
     public Manager(Stage stage){
         this.stage = stage;
         this.terc = new Stage();
+        this.cuar = new Stage();
         this.second = new Stage();
     }
 
@@ -90,6 +97,29 @@ public class Manager {
         } catch (IOException e) {
         }
     }
+    public void showPersonEdit(FXMLDocumentController epc ,TreeItem top,LinkedList<LinkedList> l){
+                try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLEditPerson.fxml"));
+            AnchorPane ruta = (AnchorPane) loader.load();
+            
+           
+            FXMLEditPersonController f = loader.getController();
+           
+            f.setDocController(epc);
+            f.setTreeOption(top);
+            f.setStagePrincipal(cuar);
+            f.setMainList(l);
+            Scene scene = new Scene(ruta);
+            cuar.setScene(scene);
+            cuar.setResizable(false);                                            ///////// BLOQUEAR TAMAÑO
+            cuar.initModality(Modality.APPLICATION_MODAL);                            ///////// Ventana tipo moda (no deja usar principal hasta no cerrar la secundaria
+            
+            cuar.show();
+
+        } catch (IOException e) {
+        }
+    }
+    
 
     public FXMLFramePersonController getCp() {
         return cp;

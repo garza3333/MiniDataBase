@@ -232,7 +232,9 @@ public class FXMLDocumentController implements Initializable {
 
     }}}
  
-    
+    public LinkedList<LinkedList> getList(){
+        return this.folderList;
+    }
     
     private static class CallbackImpl implements Callback<TreeView<String>, TreeCell<String>> {
         private LinkedList<LinkedList> list;

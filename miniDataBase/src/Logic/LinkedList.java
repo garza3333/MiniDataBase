@@ -99,6 +99,7 @@ public class LinkedList <T> {
         Object r = this.fdI(index);
         return r;
     }
+
     /**
      * Llama al método privado que permite ver la lista en pantalla
      */
@@ -256,6 +257,7 @@ public class LinkedList <T> {
         return null;
 
     }
+
     /**
      * Busca la referencia de un nodo con respecto a su valor
      * @param value - parametro para que reconozca el nodo
