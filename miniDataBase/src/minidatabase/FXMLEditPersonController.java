@@ -1,20 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package minidatabase;
 
 import Logic.LinkedList;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -23,8 +12,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * FXML Controller class
@@ -33,7 +20,7 @@ import org.json.JSONObject;
  */
 public class FXMLEditPersonController implements Initializable {
     
-    private final String root = "C:\\Users\\Usuario\\Desktop\\Daniel programacion\\mBaseData\\miniDataBase\\root\\";
+    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\minDATAbase\\miniDataBase\\root\\";
     @FXML
     private Button btnCancel;
     @FXML

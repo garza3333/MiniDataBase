@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package minidatabase;
 
 import Logic.LinkedList;
@@ -37,7 +33,7 @@ import org.json.JSONObject;
  * @author dgarcia
  */
 public class FXMLDocumentController implements Initializable {
-    private final String root = "C:\\Users\\Usuario\\Desktop\\Daniel programacion\\mBaseData\\miniDataBase\\root\\";
+    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\minDATAbase\\miniDataBase\\root\\";
     
     //Manager
     private Manager manager;
@@ -118,12 +114,14 @@ public class FXMLDocumentController implements Initializable {
 
         //Functions 
 
+    
     /**
-     *
-     * @param e
+     * Inicializa el arbol de vista con la informacion que se encuentra en las 
+     * carpetas ya creadas previamente
+     * @throws IOException
+     * @throws JSONException
+     * @throws JSONException 
      */
-
-
     private void init() throws IOException, JSONException, JSONException{
         
             BufferedReader r = new BufferedReader(
@@ -171,6 +169,12 @@ public class FXMLDocumentController implements Initializable {
                     
 
 }}
+    /**
+     * Se encarga de crear cada carpeta y llenarla con un archivo que contiene 
+     * la informacion de cada persona en formato json
+     * @throws IOException
+     * @throws JSONException 
+     */
     public void saveOnDisc() throws IOException, JSONException{
         Object[] result;
         result = this.troot.getChildren().toArray();
@@ -232,10 +236,19 @@ public class FXMLDocumentController implements Initializable {
 
     }}}
  
+    /**
+     * Obtiene la lista principal en donde se encuentra toda la informacion en
+     * memoria de ejecucion
+     * @return 
+     */
     public LinkedList<LinkedList> getList(){
         return this.folderList;
     }
     
+    /**
+     * Clase que permite la creacion de los menus a la hora de dar click derecho
+     * a un item del árbol de vista
+     */
     private static class CallbackImpl implements Callback<TreeView<String>, TreeCell<String>> {
         private LinkedList<LinkedList> list;
         private FXMLDocumentController ffpc;

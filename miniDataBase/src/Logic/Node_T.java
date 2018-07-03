@@ -5,11 +5,9 @@ package Logic;
  * @param <T> generico
  */
 public class Node_T <T> { 
-    private Node_T previous;
-    private Node_T next;
-    private T value;
     
-    
+    private Node_T next; // puntero hacia el siguiente nodo
+    private T value; // Valor dentro del nodo
     
     public Node_T(){
         this(null);
@@ -21,7 +19,7 @@ public class Node_T <T> {
     public Node_T(T value){
         this.value = value;
         this.next = null;
-        this.previous = null;
+       
      
     }
     /**
@@ -45,16 +43,12 @@ public class Node_T <T> {
     public Node_T getNext(){
         return this.next;
     }
+    /**
+     * Setea un valor al puntero siguiente
+     * @param node nodo siguiente al actual
+     */
     public void setNext(Node_T node){
         this.next = node;
     }
-    public void setPrevious(Node_T node){
-        
-        this.previous = node;
-    }
-    public Node_T getPrevious(){
-    return this.previous;
-    }
-
-    
+ 
 }
