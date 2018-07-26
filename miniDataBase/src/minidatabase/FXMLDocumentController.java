@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.MouseButton;
+import javax.swing.filechooser.FileSystemView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,7 +34,8 @@ import org.json.JSONObject;
  * @author dgarcia
  */
 public class FXMLDocumentController implements Initializable {
-    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\minDATAbase\\miniDataBase\\root\\";
+//    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\minDATAbase\\miniDataBase\\root\\";
+    private final String root = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()+"ProyectData\\miniDataBase\\root\\";
     
     //Manager
     private Manager manager;

@@ -12,6 +12,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
+import javax.swing.filechooser.FileSystemView;
 
 /**
  * FXML Controller class
@@ -20,7 +21,8 @@ import javafx.stage.Stage;
  */
 public class FXMLEditPersonController implements Initializable {
     
-    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\minDATAbase\\miniDataBase\\root\\";
+//    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\minDATAbase\\miniDataBase\\root\\";
+    private final String root = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()+"ProyectData\\miniDataBase\\root\\";
     @FXML
     private Button btnCancel;
     @FXML

@@ -21,6 +21,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
+import javax.swing.filechooser.FileSystemView;
 import org.json.JSONException;
 
 /**
@@ -28,7 +29,8 @@ import org.json.JSONException;
  * @author dgarcia
  */
 public class FXMLFramePersonController implements Initializable {
-    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\minDATAbase\\miniDataBase\\root\\";
+//    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\minDATAbase\\miniDataBase\\root\\";
+    private final String root = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()+"ProyectData\\miniDataBase\\root\\";
     
     private LinkedList<LinkedList> mainList; //Lista de informacion
     private FXMLDocumentController fxmlDoc; //Controlador principal

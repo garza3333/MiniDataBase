@@ -10,7 +10,7 @@
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="lib\java-json.jar" size="84697" download="eager" />
     <jar href="lib\org.apache.commons.io.jar" size="83613" download="eager" />
-    <jar href="miniDataBase.jar" size="31898" download="eager" />
+    <jar href="miniDataBase.jar" size="31907" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="miniDataBase" >
     <param name="requiredFXVersion" value="8.0+"/>
