@@ -22,7 +22,7 @@ import javax.swing.filechooser.FileSystemView;
 public class FXMLEditPersonController implements Initializable {
     
 //    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\minDATAbase\\miniDataBase\\root\\";
-    private final String root = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()+"ProyectData\\miniDataBase\\root\\";
+    private final String root = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()+"\\ProyectData\\miniDataBase\\root\\";
     @FXML
     private Button btnCancel;
     @FXML
@@ -67,6 +67,7 @@ public class FXMLEditPersonController implements Initializable {
         
 //        try {
             System.out.println("hola");
+            System.out.println(top.getValue().toString());
             //        Person p;
 //        Node_T<Person> temp;
 //        Node_T<LinkedList> listPerson = this.fxmlDoc.getList().getHead();

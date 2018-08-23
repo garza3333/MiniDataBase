@@ -30,7 +30,7 @@ import org.json.JSONException;
  */
 public class FXMLFramePersonController implements Initializable {
 //    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\minDATAbase\\miniDataBase\\root\\";
-    private final String root = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()+"ProyectData\\miniDataBase\\root\\";
+    private final String root = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()+"\\ProyectData\\miniDataBase\\root\\";
     
     private LinkedList<LinkedList> mainList; //Lista de informacion
     private FXMLDocumentController fxmlDoc; //Controlador principal

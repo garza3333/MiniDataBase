@@ -35,7 +35,7 @@ import org.json.JSONObject;
  */
 public class FXMLDocumentController implements Initializable {
 //    private final String root = "C:\\Users\\dgarcia\\Documents\\NetBeansProjects\\minDATAbase\\miniDataBase\\root\\";
-    private final String root = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()+"ProyectData\\miniDataBase\\root\\";
+    private final String root = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()+"\\ProyectData\\miniDataBase\\root\\";
     
     //Manager
     private Manager manager;

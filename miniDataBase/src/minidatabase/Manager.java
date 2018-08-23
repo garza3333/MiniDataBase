@@ -71,6 +71,7 @@ public class Manager {
             second.show();
 
         } catch (IOException e) {
+            
         }
     }
     public void showFolderN(TreeItem tOp ,LinkedList<LinkedList> l){
@@ -99,12 +100,12 @@ public class Manager {
             AnchorPane ruta = (AnchorPane) loader.load();
             
            
-            FXMLEditPersonController f = loader.getController();
+            fxmlEditPC  = loader.getController();
            
-            f.setDocController(epc);
-            f.setTreeOption(top);
-            f.setStagePrincipal(cuar);
-            f.setMainList(l);
+            fxmlEditPC.setDocController(epc);
+            fxmlEditPC.setTreeOption(top);
+            fxmlEditPC.setStagePrincipal(cuar);
+            fxmlEditPC.setMainList(l);
             Scene scene = new Scene(ruta);
             cuar.setScene(scene);
             cuar.setResizable(false);                                            ///////// BLOQUEAR TAMAÑO
@@ -113,6 +114,9 @@ public class Manager {
             cuar.show();
 
         } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                    System.out.println(e.getStackTrace());
+                    
         }
     }
     
